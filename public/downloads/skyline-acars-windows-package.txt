@@ -1,0 +1,14 @@
+Skyline ACARS Windows Package
+=============================
+
+Package type: Repository package notes
+Target: Windows 10 / 11
+Purpose: Reference package notes for the native Skyline ACARS desktop client
+
+Repository contents now include:
+- A native Windows desktop scaffold in desktop/SkylineAcars.Desktop/
+- A SimConnectGateway placeholder service for SDK integration
+- A console bootstrap that can be extended into the real ACARS client
+
+Important:
+A compiled .exe is not included in this repository snapshot because this container does not provide dotnet, Windows build tooling, or the Microsoft Flight Simulator SimConnect SDK.

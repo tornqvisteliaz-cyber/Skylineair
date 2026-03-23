@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Skyline ACARS Luxury Console
 
-## Getting Started
+This repository now contains two parts:
 
-First, run the development server:
+1. A **luxury-styled Next.js homepage/application UI** for Skyline ACARS
+2. A **native Windows desktop project scaffold** intended for SimConnect integration and eventual `.exe` output on a Windows machine
+
+## Web experience
+
+The homepage has been redesigned with a darker, premium visual language inspired by luxury automotive product sites while keeping the pilot/dispatch dashboard interactions.
+
+Included UI areas:
+
+- Telemetry cards and flight phase controls
+- Dispatch composer and ACARS inbox
+- Download assets section
+- Settings and systems status
+- Desktop bridge / SimConnect project summary
+
+## Native desktop SimConnect scaffold
+
+The repository now includes `desktop/SkylineAcars.Desktop/` with:
+
+- `SkylineAcars.Desktop.csproj`
+- `Program.cs`
+- `Services/SimConnectGateway.cs`
+- `Models/FlightSnapshot.cs`
+- `README.md`
+
+This scaffold is intended to become the real Windows ACARS client that talks to Microsoft Flight Simulator through SimConnect.
+
+## Windows/.NET build setup added
+
+The repository now also includes the setup files needed to make the desktop project buildable in a proper Windows environment:
+
+- `global.json` for SDK pinning
+- `.github/workflows/windows-desktop-build.yml` for CI build/publish
+- Windows publish settings directly in `desktop/SkylineAcars.Desktop/SkylineAcars.Desktop.csproj`
+
+With these files in place, GitHub Actions or a Windows developer machine can restore, build, publish, and archive the desktop executable output.
+
+## Important note about `.exe`
+
+A real Windows `.exe` still could **not** be built inside this container because the environment does not include:
+
+- `dotnet`
+- Windows build tooling
+- the Microsoft Flight Simulator SimConnect SDK
+
+So this repository now has the build setup required for that path, but the actual compiled Windows executable must still be produced on a Windows machine or GitHub Actions Windows runner.
+
+## Download assets
+
+The current web download buttons still point to repository assets in `public/downloads/` for the prototype web experience.
+
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `npm run dev` – start the local dev server
+- `npm run build` – create a production build
+- `npm run start` – run the production build
+- `npm run lint` – run ESLint
