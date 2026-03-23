@@ -1,0 +1,15 @@
+Skyline ACARS Chromebook Companion Guide
+========================================
+
+Package type: Prototype static download asset
+Target: Chromebook / ChromeOS
+Purpose: Reference setup guide for the Skyline ACARS companion workflow
+
+Companion scope:
+- Live flight monitoring
+- Dispatch message review
+- Messaging support from browser-based workflows
+- Operational visibility outside the primary Windows simulator client
+
+Repository note:
+This file is a downloadable prototype asset for the web application demo.
