@@ -1,195 +1,262 @@
-const features = [
+const stats = [
+  { label: "Supported aircraft", value: "A320 / A321" },
+  { label: "Telemetry cadence", value: "Real-time + interval sync" },
+  { label: "Pilot messaging", value: "Dispatch ↔ cockpit" },
+];
+
+const featureCards = [
   {
-    title: "Flight Data Capture",
-    items: [
-      "Position (lat/lon)",
-      "Höjd (FL eller ft)",
-      "Hastighet (IAS/TAS)",
-      "Heading/track",
-      "Fuel status när data finns tillgänglig",
-      "Automatisk identifiering av flight phase: taxi, takeoff, cruise, approach och landing",
-    ],
+    eyebrow: "Capture",
+    title: "Live flight telemetry from MSFS 2024",
+    description:
+      "Collect position, altitude, IAS/TAS, heading, fuel state, and flight phase directly through SimConnect with automatic event detection for takeoff, climb, cruise, descent, and landing.",
   },
   {
-    title: "ACARS-meddelanden",
-    items: [
-      "Automatiska driftmeddelanden för takeoff, top-of-descent, landing och arrival",
-      "Manuella pilotmeddelanden till dispatch",
-      "Pushade backend-meddelanden från airline dispatch till pilot",
-      "Statusmarkering för sent, delivered och received",
-    ],
+    eyebrow: "Communicate",
+    title: "ACARS messaging built for pilots and dispatch",
+    description:
+      "Handle automatic operational messages and manual text communication in one clean inbox with clear delivery states and fast access during flight.",
   },
   {
-    title: "Backend Integration",
-    items: [
-      "Skyline backend i Node.js eller Python",
-      "Databas i PostgreSQL eller MySQL",
-      "REST API för klientkommunikation",
-      "WebSocket-stöd för realtidsmeddelanden",
-      "Full loggning av flightdata och ACARS-trafik",
-    ],
-  },
-  {
-    title: "Säkerhet & robusthet",
-    items: [
-      "Autentisering för alla piloter",
-      "Offline-läge med lokal kö för meddelanden",
-      "Auto-reconnect mot både SimConnect och backend",
-      "Stöd för Windows 10/11 och Microsoft Flight Simulator 2024",
-    ],
+    eyebrow: "Operate",
+    title: "Backend-ready for airline operations",
+    description:
+      "Stream events to a Skyline backend over REST and WebSocket, log all flights and messages, and support reconnect flows when the simulator or network drops.",
   },
 ];
 
-const techStack = [
-  ["MSFS Connection", "SimConnect SDK via C#/.NET eller Python-wrapper"],
-  ["ACARS Client", "Desktop-app i C# WPF, Electron eller Qt/PyQt"],
-  ["Backend", "Node.js eller Python FastAPI/Flask"],
-  ["Databas", "PostgreSQL eller MySQL"],
-  ["API", "REST JSON och WebSocket för realtid"],
-  ["Deployment", "Windows 10/11 med stöd för MSFS 2024"],
-  ["UI", "Desktop UI, eventuellt med web-view för snabb iteration"],
+const downloadOptions = [
+  {
+    platform: "Windows 10 / 11",
+    format: "Download package",
+    title: "Skyline ACARS Desktop",
+    description:
+      "Designed as the primary flight client with native simulator connectivity, automated reports, and a focused desktop experience for Microsoft Flight Simulator 2024.",
+    cta: "Download Windows EXE",
+    note: "Best suited for live flying with MSFS 2024 and SimConnect.",
+    badge: "Primary build",
+  },
+  {
+    platform: "Chromebook / ChromeOS",
+    format: "Installable web companion",
+    title: "Skyline ACARS Companion",
+    description:
+      "A Chromebook-friendly install flow for briefing, live status tracking, and dispatch messaging when a native Windows simulator connection is not available on ChromeOS.",
+    cta: "Install on Chromebook",
+    note: "ChromeOS does not run Windows .exe files, so this experience is presented as an installable web app.",
+    badge: "ChromeOS flow",
+  },
 ];
 
-const flow = [
-  "Pilot startar Skyline ACARS-klienten.",
-  "Appen ansluter till MSFS 2024 via SimConnect.",
-  "Piloten loggar in med Skyline-konto.",
-  "Klienten börjar logga och skicka flightdata automatiskt.",
-  "Piloten kan skicka och ta emot ACARS-meddelanden under flygningen.",
-  "Dispatch ser data i backend och kan svara i realtid.",
+const checklist = [
+  "Automatic position reporting and operational flight events",
+  "Dispatch-to-pilot messaging with sent / delivered / received states",
+  "Offline queue with automatic reconnect for backend and simulator sessions",
+  "Windows-first flight client plus Chromebook companion access",
 ];
 
-const deliverables = [
-  "Installerbar ACARS-klient för Windows",
-  "Backend-server med REST API och realtidskanal",
-  "Databasmodell för loggade flights och meddelanden",
-  "Pilot-UI med tydlig status, rapportering och meddelandepanel",
+const roadmap = [
+  "Flight replay and event timeline",
+  "Push notifications for critical dispatch updates",
+  "Expanded fleet support beyond the A320/A321",
+  "CSV and PDF flight export for reporting",
+  "VATSIM / IVAO integration",
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-6 py-12 lg:px-10">
-        <section className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-sky-500/20 via-slate-900 to-slate-950 p-8 shadow-2xl shadow-sky-950/30 lg:p-12">
-          <div className="flex flex-col gap-6 lg:max-w-4xl">
-            <span className="w-fit rounded-full border border-sky-400/30 bg-sky-400/10 px-4 py-1 text-sm font-medium text-sky-200">
-              Produktkravsdokument · Microsoft Flight Simulator 2024
-            </span>
-            <div className="space-y-4">
-              <h1 className="text-4xl font-semibold tracking-tight text-white lg:text-6xl">
-                Skyline ACARS PRD
+    <main className="min-h-screen bg-[#06131f] text-white">
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.28),_transparent_30%),radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.18),_transparent_25%),linear-gradient(180deg,_rgba(7,17,29,0.88),_rgba(4,10,18,1))]" />
+        <div className="relative mx-auto max-w-7xl px-6 py-10 lg:px-10 lg:py-14">
+          <header className="mb-12 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm uppercase tracking-[0.35em] text-sky-200/80">
+                Skyline Virtual Airline
+              </p>
+              <h1 className="mt-2 text-2xl font-semibold text-white">
+                Skyline ACARS
               </h1>
-              <p className="max-w-3xl text-base leading-8 text-slate-300 lg:text-lg">
-                Skyline ACARS är ett pilot- och virtual airline-datalänkssystem för
-                Microsoft Flight Simulator 2024. Målet är att automatisera
-                rapportering av flightdata, möjliggöra tvåvägsmeddelanden mellan
-                pilot och dispatch samt ge realtidsdata till Skyline-operationer.
+            </div>
+            <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 backdrop-blur">
+              Microsoft Flight Simulator 2024 • Download-ready concept
+            </div>
+          </header>
+
+          <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+            <div className="max-w-3xl">
+              <span className="inline-flex rounded-full border border-sky-300/20 bg-sky-300/10 px-4 py-1 text-sm text-sky-100">
+                English product page • redesigned experience
+              </span>
+              <h2 className="mt-6 text-5xl font-semibold leading-tight tracking-tight text-white lg:text-7xl">
+                Download the ACARS client built for pilots, dispatch, and real-time airline ops.
+              </h2>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 lg:text-xl">
+                Skyline ACARS connects Microsoft Flight Simulator 2024 to your airline backend,
+                automates flight reporting, and keeps pilots and dispatch synchronized with a
+                cleaner, more premium interface.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <a
+                  href="#downloads"
+                  className="inline-flex items-center justify-center rounded-full bg-sky-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-300"
+                >
+                  View downloads
+                </a>
+                <a
+                  href="#features"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Explore features
+                </a>
+              </div>
+              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+                {stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-xl shadow-sky-950/10 backdrop-blur"
+                  >
+                    <p className="text-sm text-slate-400">{stat.label}</p>
+                    <p className="mt-2 text-lg font-semibold text-white">{stat.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-white/10 bg-white/6 p-5 shadow-2xl shadow-sky-950/30 backdrop-blur-xl">
+              <div className="rounded-[1.5rem] border border-white/10 bg-[#081827] p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">
+                      Live flight board
+                    </p>
+                    <p className="mt-2 text-xl font-semibold">SKY204 • ENROUTE</p>
+                  </div>
+                  <div className="rounded-full bg-emerald-400/15 px-3 py-1 text-sm text-emerald-200">
+                    Connected
+                  </div>
+                </div>
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {[
+                    ["Position", "59.3293° N / 18.0686° E"],
+                    ["Altitude", "FL360"],
+                    ["Ground speed", "451 kt"],
+                    ["Fuel remaining", "6.4 t"],
+                  ].map(([label, value]) => (
+                    <div key={label} className="rounded-2xl bg-white/5 p-4">
+                      <p className="text-xs uppercase tracking-[0.25em] text-slate-500">{label}</p>
+                      <p className="mt-2 text-lg font-medium text-white">{value}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 rounded-2xl border border-white/10 bg-slate-950/60 p-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-white">Dispatch message</p>
+                      <p className="mt-1 text-sm text-slate-300">
+                        Updated arrival stand assigned. Expect gate A12 on landing.
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-sky-400/15 px-3 py-1 text-xs font-medium text-sky-100">
+                      Delivered
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-6 pb-16 lg:px-10 lg:pb-24">
+        <section
+          id="downloads"
+          className="mt-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 shadow-2xl shadow-black/10 lg:p-8"
+        >
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-sm uppercase tracking-[0.35em] text-sky-200/75">Downloads</p>
+              <h3 className="mt-3 text-3xl font-semibold text-white lg:text-4xl">
+                Platform-specific delivery for Windows and Chromebook users
+              </h3>
+              <p className="mt-3 text-base leading-7 text-slate-300 lg:text-lg">
+                The page is now structured like a proper download product site: Windows gets the
+                primary simulator-connected desktop experience, while Chromebook users get a
+                polished companion install path tailored for ChromeOS constraints.
               </p>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-sm text-slate-400">Primära flygplan</p>
-                <p className="mt-2 text-xl font-semibold text-white">A320 &amp; A321</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-sm text-slate-400">Plattform</p>
-                <p className="mt-2 text-xl font-semibold text-white">Windows 10/11</p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="text-sm text-slate-400">Koppling</p>
-                <p className="mt-2 text-xl font-semibold text-white">SimConnect + REST/WebSocket</p>
-              </div>
-            </div>
+          </div>
+
+          <div className="mt-8 grid gap-6 xl:grid-cols-2">
+            {downloadOptions.map((option) => (
+              <article
+                key={option.platform}
+                className="flex h-full flex-col rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] p-6"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm uppercase tracking-[0.28em] text-slate-400">
+                      {option.platform}
+                    </p>
+                    <h4 className="mt-3 text-2xl font-semibold text-white">{option.title}</h4>
+                  </div>
+                  <span className="rounded-full border border-sky-300/20 bg-sky-300/10 px-3 py-1 text-xs font-medium text-sky-100">
+                    {option.badge}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm font-medium text-sky-200">{option.format}</p>
+                <p className="mt-4 flex-1 text-base leading-7 text-slate-300">{option.description}</p>
+                <div className="mt-6 rounded-2xl border border-white/10 bg-slate-950/50 p-4 text-sm leading-6 text-slate-300">
+                  {option.note}
+                </div>
+                <button
+                  type="button"
+                  className="mt-6 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-slate-100"
+                >
+                  {option.cta}
+                </button>
+              </article>
+            ))}
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-2">
-          {features.map((feature) => (
+        <section id="features" className="mt-12 grid gap-6 lg:grid-cols-3">
+          {featureCards.map((card) => (
             <article
-              key={feature.title}
-              className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur"
+              key={card.title}
+              className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 shadow-xl shadow-black/10"
             >
-              <h2 className="text-2xl font-semibold text-white">{feature.title}</h2>
-              <ul className="mt-4 space-y-3 text-sm leading-7 text-slate-300 lg:text-base">
-                {feature.items.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-400" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-sm uppercase tracking-[0.3em] text-sky-200/75">{card.eyebrow}</p>
+              <h3 className="mt-4 text-2xl font-semibold text-white">{card.title}</h3>
+              <p className="mt-4 text-base leading-7 text-slate-300">{card.description}</p>
             </article>
           ))}
         </section>
 
-        <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-          <article className="rounded-3xl border border-white/10 bg-slate-900/80 p-6">
-            <h2 className="text-2xl font-semibold text-white">Teknisk stack</h2>
-            <div className="mt-6 overflow-hidden rounded-2xl border border-white/10">
-              <table className="min-w-full divide-y divide-white/10 text-left text-sm lg:text-base">
-                <thead className="bg-white/5 text-slate-300">
-                  <tr>
-                    <th className="px-4 py-3 font-medium">Komponent</th>
-                    <th className="px-4 py-3 font-medium">Teknologi</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10 text-slate-200">
-                  {techStack.map(([component, technology]) => (
-                    <tr key={component}>
-                      <td className="px-4 py-3 font-medium text-white">{component}</td>
-                      <td className="px-4 py-3">{technology}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </article>
-
-          <article className="rounded-3xl border border-white/10 bg-white/5 p-6">
-            <h2 className="text-2xl font-semibold text-white">Användarflöde</h2>
-            <ol className="mt-4 space-y-4">
-              {flow.map((step, index) => (
-                <li key={step} className="flex gap-4">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sky-400/20 text-sm font-semibold text-sky-200">
-                    {index + 1}
-                  </span>
-                  <p className="pt-1 text-sm leading-7 text-slate-300 lg:text-base">{step}</p>
+        <section className="mt-12 grid gap-6 xl:grid-cols-[0.95fr_1.05fr]">
+          <article className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6">
+            <p className="text-sm uppercase tracking-[0.35em] text-sky-200/75">Included in scope</p>
+            <h3 className="mt-4 text-3xl font-semibold text-white">Operational features that matter during a live flight</h3>
+            <ul className="mt-6 space-y-4">
+              {checklist.map((item) => (
+                <li key={item} className="flex gap-3 text-base leading-7 text-slate-300">
+                  <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-sky-400" />
+                  <span>{item}</span>
                 </li>
               ))}
-            </ol>
-          </article>
-        </section>
-
-        <section className="grid gap-6 lg:grid-cols-3">
-          <article className="rounded-3xl border border-emerald-400/20 bg-emerald-400/10 p-6">
-            <h2 className="text-2xl font-semibold text-white">MVP</h2>
-            <ul className="mt-4 space-y-3 text-sm leading-7 text-emerald-50 lg:text-base">
-              <li>Automatisk flightdata-logging</li>
-              <li>Auto positionrapportering vid takeoff, cruise och landing</li>
-              <li>Textmeddelanden mellan pilot och dispatch</li>
-              <li>UI som visar flightdata och meddelanden</li>
-              <li>Backend med databas och API</li>
             </ul>
           </article>
 
-          <article className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6">
-            <h2 className="text-2xl font-semibold text-white">Stretch goals</h2>
-            <ul className="mt-4 space-y-3 text-sm leading-7 text-amber-50 lg:text-base">
-              <li>Grafisk flight replay</li>
-              <li>Push notifications för kritiska meddelanden</li>
-              <li>Utökat stöd för flera flygplanstyper</li>
-              <li>Export av flight logging till CSV/PDF</li>
-              <li>Integration med VATSIM/IVAO</li>
-            </ul>
-          </article>
-
-          <article className="rounded-3xl border border-sky-400/20 bg-sky-400/10 p-6">
-            <h2 className="text-2xl font-semibold text-white">Leverabler</h2>
-            <ul className="mt-4 space-y-3 text-sm leading-7 text-sky-50 lg:text-base">
-              {deliverables.map((item) => (
-                <li key={item}>{item}</li>
+          <article className="rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(14,165,233,0.12),rgba(255,255,255,0.03))] p-6">
+            <p className="text-sm uppercase tracking-[0.35em] text-sky-100/80">Roadmap</p>
+            <h3 className="mt-4 text-3xl font-semibold text-white">What comes after the first release</h3>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {roadmap.map((item) => (
+                <div key={item} className="rounded-2xl border border-white/10 bg-slate-950/40 p-4 text-sm leading-6 text-slate-200">
+                  {item}
+                </div>
               ))}
-            </ul>
+            </div>
           </article>
         </section>
       </div>

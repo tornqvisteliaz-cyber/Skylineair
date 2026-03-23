@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Skyline ACARS PRD",
+  title: "Skyline ACARS Downloads",
   description:
-    "Produktkravsdokument för Skyline ACARS till Microsoft Flight Simulator 2024.",
+    "English product landing page for Skyline ACARS with Windows and Chromebook download flows.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="sv">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );
