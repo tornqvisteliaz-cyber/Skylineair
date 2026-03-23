@@ -29,15 +29,25 @@ The repository now includes `desktop/SkylineAcars.Desktop/` with:
 
 This scaffold is intended to become the real Windows ACARS client that talks to Microsoft Flight Simulator through SimConnect.
 
+## Windows/.NET build setup added
+
+The repository now also includes the setup files needed to make the desktop project buildable in a proper Windows environment:
+
+- `global.json` for SDK pinning
+- `.github/workflows/windows-desktop-build.yml` for CI build/publish
+- Windows publish settings directly in `desktop/SkylineAcars.Desktop/SkylineAcars.Desktop.csproj`
+
+With these files in place, GitHub Actions or a Windows developer machine can restore, build, publish, and archive the desktop executable output.
+
 ## Important note about `.exe`
 
-A real Windows `.exe` could **not** be built inside this container because the environment does not include:
+A real Windows `.exe` still could **not** be built inside this container because the environment does not include:
 
 - `dotnet`
 - Windows build tooling
 - the Microsoft Flight Simulator SimConnect SDK
 
-So this change adds the code structure needed for that path in GitHub, but the actual compiled Windows executable still needs to be produced on a Windows build machine.
+So this repository now has the build setup required for that path, but the actual compiled Windows executable must still be produced on a Windows machine or GitHub Actions Windows runner.
 
 ## Download assets
 

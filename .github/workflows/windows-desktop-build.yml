@@ -1,0 +1,42 @@
+name: Windows Desktop Build
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'desktop/SkylineAcars.Desktop/**'
+      - '.github/workflows/windows-desktop-build.yml'
+      - 'global.json'
+  pull_request:
+    paths:
+      - 'desktop/SkylineAcars.Desktop/**'
+      - '.github/workflows/windows-desktop-build.yml'
+      - 'global.json'
+
+jobs:
+  build-desktop:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: Restore desktop project
+        run: dotnet restore .\desktop\SkylineAcars.Desktop\SkylineAcars.Desktop.csproj
+
+      - name: Build desktop project
+        run: dotnet build .\desktop\SkylineAcars.Desktop\SkylineAcars.Desktop.csproj --configuration Release --no-restore
+
+      - name: Publish desktop executable
+        run: dotnet publish .\desktop\SkylineAcars.Desktop\SkylineAcars.Desktop.csproj --configuration Release --no-build -r win-x64 --self-contained true -p:PublishSingleFile=true
+
+      - name: Upload publish artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: skyline-acars-desktop-win-x64
+          path: desktop\SkylineAcars.Desktop\bin\Release\net8.0-windows\win-x64\publish\
