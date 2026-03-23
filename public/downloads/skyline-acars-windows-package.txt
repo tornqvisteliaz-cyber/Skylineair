@@ -1,16 +1,14 @@
 Skyline ACARS Windows Package
 =============================
 
-Package type: Prototype static download asset
+Package type: Repository package notes
 Target: Windows 10 / 11
-Purpose: Reference package for the Skyline ACARS desktop client concept
+Purpose: Reference package notes for the native Skyline ACARS desktop client
 
-Included concept scope:
-- SimConnect-driven telemetry capture
-- Automatic ACARS reporting
-- Pilot / dispatch messaging
-- Offline queue and reconnect handling
-- A320 / A321 focused operations
+Repository contents now include:
+- A native Windows desktop scaffold in desktop/SkylineAcars.Desktop/
+- A SimConnectGateway placeholder service for SDK integration
+- A console bootstrap that can be extended into the real ACARS client
 
-Repository note:
-This file is a downloadable prototype asset for the web application demo.
+Important:
+A compiled .exe is not included in this repository snapshot because this container does not provide dotnet, Windows build tooling, or the Microsoft Flight Simulator SimConnect SDK.

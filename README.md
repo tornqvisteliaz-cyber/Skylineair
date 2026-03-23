@@ -1,27 +1,47 @@
-# Skyline ACARS Application UI
+# Skyline ACARS Luxury Console
 
-This project now delivers a **full application-style Skyline ACARS interface** in Next.js instead of a simple marketing page.
+This repository now contains two parts:
 
-## Included experience
+1. A **luxury-styled Next.js homepage/application UI** for Skyline ACARS
+2. A **native Windows desktop project scaffold** intended for SimConnect integration and eventual `.exe` output on a Windows machine
 
-The app includes:
+## Web experience
 
-- A pilot workspace sidebar with section switching
-- Live telemetry cards and connection health indicators
-- A flight timeline with selectable phase state
-- An ACARS inbox with selectable messages
-- A dispatch message composer with interactive send state
-- Working download links backed by real files in `public/downloads`
-- Reporting preference toggles
+The homepage has been redesigned with a darker, premium visual language inspired by luxury automotive product sites while keeping the pilot/dispatch dashboard interactions.
+
+Included UI areas:
+
+- Telemetry cards and flight phase controls
+- Dispatch composer and ACARS inbox
+- Download assets section
+- Settings and systems status
+- Desktop bridge / SimConnect project summary
+
+## Native desktop SimConnect scaffold
+
+The repository now includes `desktop/SkylineAcars.Desktop/` with:
+
+- `SkylineAcars.Desktop.csproj`
+- `Program.cs`
+- `Services/SimConnectGateway.cs`
+- `Models/FlightSnapshot.cs`
+- `README.md`
+
+This scaffold is intended to become the real Windows ACARS client that talks to Microsoft Flight Simulator through SimConnect.
+
+## Important note about `.exe`
+
+A real Windows `.exe` could **not** be built inside this container because the environment does not include:
+
+- `dotnet`
+- Windows build tooling
+- the Microsoft Flight Simulator SimConnect SDK
+
+So this change adds the code structure needed for that path in GitHub, but the actual compiled Windows executable still needs to be produced on a Windows build machine.
 
 ## Download assets
 
-The download buttons are now wired to actual static files:
-
-- `public/downloads/skyline-acars-windows-package.txt`
-- `public/downloads/skyline-acars-chromebook-guide.txt`
-
-These are product/package assets suitable for download in the browser for this prototype repository.
+The current web download buttons still point to repository assets in `public/downloads/` for the prototype web experience.
 
 ## Local development
 
@@ -29,8 +49,6 @@ These are product/package assets suitable for download in the browser for this p
 npm install
 npm run dev
 ```
-
-Then open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 

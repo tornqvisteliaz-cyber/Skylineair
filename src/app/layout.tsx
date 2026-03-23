@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Skyline ACARS Downloads",
+  title: "Skyline ACARS Luxury Console",
   description:
-    "English product landing page for Skyline ACARS with Windows and Chromebook download flows.",
+    "Luxury-inspired Skyline ACARS homepage with repository-backed desktop SimConnect project scaffolding.",
 };
 
 export default function RootLayout({
